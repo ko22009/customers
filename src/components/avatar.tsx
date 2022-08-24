@@ -14,7 +14,7 @@ const Avatar = ({ value = 'test', size = '100%' }: avatarProps) => {
   }, [value]);
 
   return (
-    <svg className="bg-gray-200 rounded" data-jdenticon-value={value} height={size} ref={icon} width={size} />
+    <svg className="bg-gray-200 rounded inline mr-2" data-jdenticon-value={value} height={size} ref={icon} width={size} />
   );
 };
 
