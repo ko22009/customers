@@ -28,6 +28,7 @@ const Form = ({register, reset, formState: {errors}, watch, handleSubmit, setVal
         id,
         email: data.email,
         company: data.company,
+        password: data.password,
         name: `${data.firstName} ${data.lastName}`,
       });
     } else {
@@ -36,6 +37,7 @@ const Form = ({register, reset, formState: {errors}, watch, handleSubmit, setVal
         id: Id!,
         email: data.email,
         company: data.company,
+        password: data.password,
         name: `${data.firstName} ${data.lastName}`,
       });
     }
