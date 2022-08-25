@@ -3,6 +3,7 @@ import hidden from './resources/Eye Off.svg';
 import editable from './resources/Edit.svg';
 import removable from './resources/Trash.svg';
 import Image from 'next/image';
+import React from 'react';
 
 const IconList = {
   visible,
@@ -13,11 +14,12 @@ const IconList = {
 
 type IconProps = {
   type: keyof typeof IconList;
-  className?: string
+  className?: string;
+  onClick?: React.MouseEventHandler
 }
 
-const Icon = ({ type, className }: IconProps) => {
-  return <div className={`flex justify-center ${className}`}>
+const Icon = ({ type, className, onClick }: IconProps) => {
+  return <div className={`flex justify-center ${className} ${onClick ? 'cursor-pointer' : ''}`} onClick={onClick}>
     <Image alt={type} src={IconList[type]} className={className} />
   </div>;
 };

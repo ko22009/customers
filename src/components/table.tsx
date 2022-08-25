@@ -2,10 +2,12 @@ import Avatar from './avatar';
 import { useContext } from 'react';
 import { StoreContext } from '../store';
 import Activator from './activator';
-import Icon from './icon'
+import Icon from './icon';
+import { UseFormReturn } from 'react-hook-form/dist/types';
+import { IFormInput } from './form';
 
-const Table = () => {
-  const { data, actions } = useContext(StoreContext);
+const Table = ({ setValue }: UseFormReturn<IFormInput>) => {
+  const { data, actions, setId } = useContext(StoreContext);
   return <table
     className='border-collapse w-full text-sm'>
     <thead>
@@ -28,8 +30,20 @@ const Table = () => {
         <Activator active={customer.isAdmin} />
       </td>
       <td className='p-2 text-slate-900 flex'>
-        <Icon className="mr-2" type="editable" />
-        <Icon type="removable" />
+        <Icon className='mr-2' type='editable' onClick={() => {
+          const el = data.find(el => el.id === customer.id);
+          if (!el) return;
+          actions.setAction('update');
+          setId(customer.id);
+          const name = el.name.split(' ');
+          setValue('firstName', name[0]);
+          setValue('lastName', name[1]);
+          setValue('company', el.company);
+          setValue('status', el.isAdmin ? 'Administrator' : 'User');
+          setValue('email', el.email);
+          setValue('password', el.password);
+        }} />
+        <Icon type='removable' onClick={() => actions.remove(customer)} />
       </td>
     </tr>)}
     </tbody>
